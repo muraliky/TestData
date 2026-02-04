@@ -1,0 +1,43 @@
+{
+  "projectName": "playwright-automation",
+  "description": "Migrated from Selenium BDD",
+  
+  "source": {
+    "rootDir": "/full/path/to/your-selenium-repo",
+    
+    "pages": {
+      "path": "src/test/java/com/company/pages"
+    },
+    
+    "steps": {
+      "path": "src/test/java/com/company/steps"
+    },
+    
+    "features": {
+      "path": "src/test/resources/features"
+    }
+  },
+  
+  "target": {
+    "rootDir": "/full/path/to/playwright-automation",
+    "pages": "src/pages",
+    "steps": "src/steps",
+    "features": "features",
+    "fixtures": "src/steps/fixtures.ts"
+  },
+  
+  "options": {
+    "features": {
+      "convertAndBut": true,
+      "preserveTags": true,
+      "folderMapping": {
+      }
+    },
+    "project": {
+      "browsers": ["chromium", "firefox"],
+      "environments": ["dev", "qa", "staging"],
+      "defaultEnv": "dev",
+      "baseUrl": "https://example.com"
+    }
+  }
+}
