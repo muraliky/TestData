@@ -1,0 +1,58 @@
+{
+  "projectName": "acc-ic-playwright-automation",
+  "description": "Wells Fargo ACC IC Automation - QAF to Playwright Migration",
+  
+  "source": {
+    "rootDir": "C:/Projects/3acc-ic-automation-uat",
+    
+    "pages": {
+      "path": "src/test/java/com/wellsfargo/acc/ic/automation/web/pages"
+    },
+    "steps": {
+      "path": "src/test/java/com/wellsfargo/acc/ic/automation/web/steps"
+    },
+    "features": {
+      "path": "scenarios/test"
+    }
+  },
+  
+  "target": {
+    "rootDir": "C:/Projects/acc-ic-playwright-automation",
+    "pages": "src/pages",
+    "steps": "src/steps",
+    "features": "features",
+    "fixtures": "src/steps/fixtures.ts"
+  },
+  
+  "options": {
+    "features": {
+      "convertAndBut": true,
+      "preserveTags": true,
+      "folderMapping": {
+        "e2e.Smoke": "smoke",
+        "AccountsandAggregates": "accounts-and-aggregates",
+        "AdminUX": "admin-ux",
+        "AssetAllocationModel": "asset-allocation-model",
+        "IntradayCash": "intraday-cash",
+        "MutualFundOrders": "mutual-fund-orders",
+        "PledgedAssetRestrictions": "pledged-asset-restrictions",
+        "PositionsandTaxLots": "positions-and-tax-lots"
+      }
+    },
+    "pages": {
+      "baseClass": "BasePage",
+      "generateAssertions": true,
+      "generateNavigation": true
+    },
+    "steps": {
+      "stepAnnotations": ["QAFTestStep", "Given", "When", "Then"],
+      "inferStepType": true
+    },
+    "project": {
+      "browsers": ["chromium", "firefox"],
+      "environments": ["dev", "et", "pte", "cte"],
+      "defaultEnv": "dev",
+      "baseUrl": "https://dev.wellsfargo.com"
+    }
+  }
+}

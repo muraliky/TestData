@@ -1,0 +1,28 @@
+{
+  "folders": [
+    {
+      "name": "Playwright (Target)",
+      "path": "C:/Projects/playwright-automation"
+    },
+    {
+      "name": "Selenium (Source - Reference Only)",
+      "path": "C:/Projects/selenium-repo"
+    }
+  ],
+  "settings": {
+    "github.copilot.enable": {
+      "*": true,
+      "markdown": true,
+      "plaintext": true
+    },
+    "editor.inlineSuggest.enabled": true,
+    "typescript.preferences.includePackageJsonAutoImports": "auto"
+  },
+  "extensions": {
+    "recommendations": [
+      "GitHub.copilot",
+      "GitHub.copilot-chat",
+      "ms-playwright.playwright"
+    ]
+  }
+}

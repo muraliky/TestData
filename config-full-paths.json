@@ -1,0 +1,49 @@
+{
+  "projectName": "playwright-automation",
+  "description": "Example with full absolute paths - source and target on different locations",
+  
+  "source": {
+    "rootDir": "C:/Projects/Legacy/my-selenium-repo",
+    
+    "pages": {
+      "path": "src/test/java/com/mycompany/automation/pages"
+    },
+    "steps": {
+      "path": "src/test/java/com/mycompany/automation/steps"
+    },
+    "features": {
+      "path": "src/test/resources/features"
+    }
+  },
+  
+  "target": {
+    "rootDir": "D:/NewProjects/my-playwright-automation",
+    "pages": "src/pages",
+    "steps": "src/steps",
+    "features": "features",
+    "fixtures": "src/steps/fixtures.ts"
+  },
+  
+  "options": {
+    "features": {
+      "convertAndBut": true,
+      "preserveTags": true,
+      "folderMapping": {}
+    },
+    "pages": {
+      "baseClass": "BasePage",
+      "generateAssertions": true,
+      "generateNavigation": true
+    },
+    "steps": {
+      "stepAnnotations": ["QAFTestStep", "Given", "When", "Then"],
+      "inferStepType": true
+    },
+    "project": {
+      "browsers": ["chromium", "firefox"],
+      "environments": ["dev", "qa", "staging"],
+      "defaultEnv": "dev",
+      "baseUrl": "https://dev.example.com"
+    }
+  }
+}
