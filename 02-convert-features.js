@@ -28,7 +28,7 @@ if (!fs.existsSync(configPath)) {
 let config;
 try {
   const content = fs.readFileSync(configPath, 'utf8');
-  const cleanContent = content.replace(/"\/\/[^"]*":\s*"[^"]*",?\s*/g, '');
+  const cleanContent = content.replace(/\/\/.*$/gm, '').replace(/,\s*}/g, '}').replace(/,\s*]/g, ']');
   config = JSON.parse(cleanContent);
 } catch (err) {
   console.log('\n[ERROR] Failed to parse configuration: ' + err.message);
@@ -83,34 +83,71 @@ function convertFolderName(name) {
 // Function to convert And/But keywords
 function convertFeatureContent(content) {
   const lines = content.split('\n');
-  let lastKeyword = '';
+  let lastKeyword = 'Given'; // Default to Given if no previous keyword
   const convertedLines = [];
   let conversions = 0;
   
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
+    const trimmedLine = line.trim();
     
-    // Match Given, When, Then
-    const keywordMatch = line.match(/^(\s*)(Given|When|Then)\s+(.*)$/);
-    if (keywordMatch) {
-      lastKeyword = keywordMatch[2];
+    // Skip comments and empty lines
+    if (trimmedLine.startsWith('#') || trimmedLine === '') {
       convertedLines.push(line);
       continue;
     }
     
+    // Match Given, When, Then - capture the keyword and update lastKeyword
+    const keywordMatch = trimmedLine.match(/^(Given|When|Then)\s+(.*)$/i);
+    if (keywordMatch) {
+      lastKeyword = keywordMatch[1];
+      // Preserve original case but normalize to proper case
+      const properKeyword = lastKeyword.charAt(0).toUpperCase() + lastKeyword.slice(1).toLowerCase();
+      const indent = line.match(/^(\s*)/)[1];
+      convertedLines.push(indent + properKeyword + ' ' + keywordMatch[2]);
+      continue;
+    }
+    
     // Match And or But - replace with last keyword
-    const andButMatch = line.match(/^(\s*)(And|But)\s+(.*)$/);
-    if (andButMatch && lastKeyword) {
-      const indent = andButMatch[1];
-      const stepText = andButMatch[3];
-      convertedLines.push(indent + lastKeyword + ' ' + stepText);
+    const andButMatch = trimmedLine.match(/^(And|But)\s+(.*)$/i);
+    if (andButMatch) {
+      const indent = line.match(/^(\s*)/)[1];
+      const stepText = andButMatch[2];
+      
+      // Determine appropriate keyword based on step text if no previous keyword
+      let keywordToUse = lastKeyword;
+      
+      // If step text suggests a specific type, use it
+      const lowerStepText = stepText.toLowerCase();
+      if (lowerStepText.startsWith('user should') || 
+          lowerStepText.startsWith('verify') ||
+          lowerStepText.includes('should see') ||
+          lowerStepText.includes('should be') ||
+          lowerStepText.includes('is displayed') ||
+          lowerStepText.includes('validates')) {
+        keywordToUse = 'Then';
+      } else if (lowerStepText.startsWith('user is') || 
+                 lowerStepText.startsWith('user has') ||
+                 lowerStepText.includes('logged in') ||
+                 lowerStepText.includes('exists')) {
+        keywordToUse = 'Given';
+      } else if (lowerStepText.startsWith('user ') ||
+                 lowerStepText.includes('clicks') ||
+                 lowerStepText.includes('click on') ||
+                 lowerStepText.includes('navigates') ||
+                 lowerStepText.includes('enters') ||
+                 lowerStepText.includes('logs')) {
+        keywordToUse = 'When';
+      }
+      
+      convertedLines.push(indent + keywordToUse + ' ' + stepText);
       conversions++;
       continue;
     }
     
-    // Reset on Scenario/Background/Feature
-    if (line.match(/^\s*(Scenario|Background|Feature|Examples|Rule)/)) {
-      lastKeyword = '';
+    // Reset lastKeyword on Scenario/Background/Feature/Examples
+    if (trimmedLine.match(/^(Scenario|Scenario Outline|Background|Feature|Examples|Rule):/i)) {
+      lastKeyword = 'Given'; // Reset to Given for new scenario
     }
     
     convertedLines.push(line);
