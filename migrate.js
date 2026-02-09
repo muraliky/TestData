@@ -47,22 +47,28 @@ for (let i = 0; i < args.length; i++) {
 // Help text
 function showHelp() {
   console.log(`
-╔══════════════════════════════════════════════════════════════╗
-║     SELENIUM TO PLAYWRIGHT MIGRATION TOOLKIT                 ║
-╚══════════════════════════════════════════════════════════════╝
+SELENIUM TO PLAYWRIGHT MIGRATION TOOLKIT
 
 USAGE:
   node migrate.js [command] [options]
 
 COMMANDS:
-  all         Run complete migration (default)
-  setup       Create Playwright project structure
-  features    Convert feature files (And/But → Given/When/Then)
-  pages       Generate TypeScript page classes from Java
-  steps       Generate TypeScript step definitions from Java
-  fixtures    Generate fixtures.ts with all page imports
-  report      Generate migration status report
-  init        Create sample configuration file
+  all               Run migration steps 1-6 (structure + skeletons)
+  all-with-implement Run ALL steps 1-8 including auto-implementation
+  
+  Individual steps:
+    setup           (1) Create Playwright project structure
+    features        (2) Convert feature files (And/But -> When/Then)
+    pages           (3) Generate TypeScript page classes from Java
+    steps           (4) Generate TypeScript step definitions from Java
+    fixtures        (5) Generate fixtures.ts with all page imports
+    report          (6) Generate migration status report
+    
+  Auto-implementation (reduces need for Copilot):
+    auto-pages      (7) Auto-implement page methods from Java source
+    auto-steps      (8) Auto-implement step definitions from patterns
+  
+  init              Create sample configuration file
 
 OPTIONS:
   --config <path>   Use custom config file (default: migration-config.json)
@@ -74,22 +80,26 @@ EXAMPLES:
   
   # Edit migration-config.json with your paths
   
-  # Run complete migration
+  # Run complete migration WITH auto-implementation (RECOMMENDED)
+  node migrate.js all-with-implement
+  
+  # Run only structure generation (more TODOs, needs Copilot)
   node migrate.js all
   
-  # Run specific step
-  node migrate.js features
+  # Run auto-implementation separately
+  node migrate.js auto-pages
+  node migrate.js auto-steps
   
   # Use custom config
-  node migrate.js all --config my-project-config.json
+  node migrate.js all-with-implement --config my-project-config.json
 
-TYPICAL WORKFLOW:
-  1. node migrate.js init              # Create config
-  2. Edit migration-config.json        # Set your paths
-  3. node migrate.js all               # Run migration
-  4. node migrate.js report            # Check status
-  5. Review and refine with Copilot    # Fix TODOs
-  6. npm install && npm test           # Verify
+RECOMMENDED WORKFLOW:
+  1. node migrate.js init                    # Create config
+  2. Edit migration-config.json              # Set your paths
+  3. node migrate.js all-with-implement      # Full migration + auto-implement
+  4. grep -r "TODO" src/ --include="*.ts"    # Check remaining TODOs
+  5. Use Copilot only for complex TODOs      # Much fewer now!
+  6. npm install && npm test                 # Verify
 `);
 }
 
@@ -275,8 +285,29 @@ async function main() {
       return runScript('06-migration-report.js', configPath);
     },
     
+    'auto-pages': () => {
+      printBanner('STEP 7: Auto-Implement Page Methods');
+      return runScript('07-auto-implement.js', configPath);
+    },
+    
+    'auto-steps': () => {
+      printBanner('STEP 8: Auto-Implement Step Definitions');
+      return runScript('08-auto-implement-steps.js', configPath);
+    },
+    
     all: () => {
       const steps = ['setup', 'features', 'pages', 'steps', 'fixtures', 'report'];
+      for (const step of steps) {
+        if (!commands[step]()) {
+          console.error('\n[ERROR] Migration failed at step: ' + step);
+          return false;
+        }
+      }
+      return true;
+    },
+    
+    'all-with-implement': () => {
+      const steps = ['setup', 'features', 'pages', 'steps', 'fixtures', 'auto-pages', 'auto-steps', 'report'];
       for (const step of steps) {
         if (!commands[step]()) {
           console.error('\n[ERROR] Migration failed at step: ' + step);
