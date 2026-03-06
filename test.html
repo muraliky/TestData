@@ -1,182 +1,202 @@
 <html>
-<body style="margin:0; padding:0; background-color:#f4f6f9; font-family:Arial, sans-serif;">
+<body style="margin:0;padding:0;background-color:#0f1923;font-family:Arial,sans-serif;">
 
-  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f6f9; padding:30px 0;">
+<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#0f1923">
+<tr><td align="center" style="padding:32px 16px;">
+
+  <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;">
+
+    <!-- TOP ACCENT BAR -->
     <tr>
-      <td align="center">
-        <table width="620" cellpadding="0" cellspacing="0" style="background-color:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+      <td style="background:linear-gradient(90deg,#2E75B6,#7B5EA7);height:5px;border-radius:8px 8px 0 0;font-size:0;">&nbsp;</td>
+    </tr>
 
-          <!-- HEADER -->
+    <!-- HEADER -->
+    <tr>
+      <td style="background-color:#1a2535;padding:32px 36px 24px 36px;border-left:1px solid #2a3a55;border-right:1px solid #2a3a55;">
+        <table width="100%" cellpadding="0" cellspacing="0">
           <tr>
-            <td style="background-color:#1F3864; padding:28px 32px;">
-              <p style="margin:0; font-size:11px; color:#9DC3E6; letter-spacing:2px; text-transform:uppercase;">UAT CoE · CoE Automation and Tools Squad</p>
-              <h1 style="margin:8px 0 0 0; font-size:24px; color:#ffffff; font-weight:bold;">New Intake Submission</h1>
+            <td>
+              <p style="margin:0 0 6px 0;font-size:10px;color:#6B8CC7;letter-spacing:3px;text-transform:uppercase;">UAT CoE &nbsp;·&nbsp; CoE Automation and Tools Squad</p>
+              <h1 style="margin:0;font-size:26px;font-weight:800;color:#ffffff;letter-spacing:-0.5px;">New Intake Submission</h1>
+            </td>
+            <td align="right" valign="top">
+              <div style="background-color:#2E75B6;border-radius:50%;width:48px;height:48px;text-align:center;line-height:48px;font-size:22px;">📋</div>
             </td>
           </tr>
-
-          <!-- TRACKING BANNER -->
-          <tr>
-            <td style="background-color:#2E75B6; padding:12px 32px;">
-              <table width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td>
-                    <span style="font-size:12px; color:#BDD7EE;">Tracking ID</span><br/>
-                    <strong style="font-size:16px; color:#ffffff;">@{outputs('Update_item')?['body/TrackingID']}</strong>
-                  </td>
-                  <td align="right">
-                    <span style="font-size:12px; color:#BDD7EE;">Submitted On</span><br/>
-                    <strong style="font-size:14px; color:#ffffff;">@{formatDateTime(utcNow(), 'MMM dd, yyyy hh:mm tt')} UTC</strong>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- PRIORITY BADGE -->
-          <tr>
-            <td style="padding:20px 32px 0 32px;">
-              <table cellpadding="0" cellspacing="0">
-                <tr>
-                  <td style="background-color:#FCE4D6; border:1px solid #C55A11; border-radius:4px; padding:6px 16px;">
-                    <span style="font-size:12px; font-weight:bold; color:#C55A11; text-transform:uppercase; letter-spacing:1px;">
-                      ⚡ Priority: @{triggerOutputs()?['body/Priority/Value']}
-                    </span>
-                  </td>
-                  <td width="12"></td>
-                  <td style="background-color:#D6E4F0; border:1px solid #2E75B6; border-radius:4px; padding:6px 16px;">
-                    <span style="font-size:12px; font-weight:bold; color:#2E75B6; text-transform:uppercase; letter-spacing:1px;">
-                      @{triggerOutputs()?['body/RequestType/Value']}
-                    </span>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- TITLE -->
-          <tr>
-            <td style="padding:16px 32px 0 32px;">
-              <h2 style="margin:0; font-size:18px; color:#1F3864; border-bottom:2px solid #2E75B6; padding-bottom:8px;">
-                @{triggerOutputs()?['body/Title']}
-              </h2>
-            </td>
-          </tr>
-
-          <!-- SUBMITTER INFO -->
-          <tr>
-            <td style="padding:20px 32px 0 32px;">
-              <p style="margin:0 0 10px 0; font-size:11px; font-weight:bold; color:#2E75B6; text-transform:uppercase; letter-spacing:1px;">Submitter Information</p>
-              <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f6f9; border-radius:6px; padding:16px;">
-                <tr>
-                  <td width="50%" style="padding:4px 0;">
-                    <span style="font-size:11px; color:#888888;">Full Name</span><br/>
-                    <strong style="font-size:14px; color:#1F3864;">@{triggerOutputs()?['body/SubmitterName']}</strong>
-                  </td>
-                  <td width="50%" style="padding:4px 0;">
-                    <span style="font-size:11px; color:#888888;">Email</span><br/>
-                    <strong style="font-size:14px; color:#2E75B6;">@{triggerOutputs()?['body/Email']}</strong>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="50%" style="padding:8px 0 4px 0;">
-                    <span style="font-size:11px; color:#888888;">UAT Area</span><br/>
-                    <strong style="font-size:14px; color:#1F3864;">@{triggerOutputs()?['body/UATArea/Value']}</strong>
-                  </td>
-                  <td width="50%" style="padding:8px 0 4px 0;">
-                    <span style="font-size:11px; color:#888888;">Role</span><br/>
-                    <strong style="font-size:14px; color:#1F3864;">@{triggerOutputs()?['body/Role']}</strong>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- REQUEST DETAILS -->
-          <tr>
-            <td style="padding:20px 32px 0 32px;">
-              <p style="margin:0 0 10px 0; font-size:11px; font-weight:bold; color:#2E75B6; text-transform:uppercase; letter-spacing:1px;">Request Details</p>
-
-              <p style="margin:0 0 6px 0; font-size:11px; color:#888888; text-transform:uppercase;">Problem Description</p>
-              <p style="margin:0 0 16px 0; font-size:14px; color:#333333; background-color:#f4f6f9; border-left:4px solid #2E75B6; padding:12px 16px; border-radius:0 6px 6px 0;">
-                @{triggerOutputs()?['body/ProblemDescription']}
-              </p>
-
-              <p style="margin:0 0 6px 0; font-size:11px; color:#888888; text-transform:uppercase;">Proposed Solution</p>
-              <p style="margin:0 0 0 0; font-size:14px; color:#333333; background-color:#f4f6f9; border-left:4px solid #1A7A5E; padding:12px 16px; border-radius:0 6px 6px 0;">
-                @{if(empty(triggerOutputs()?['body/ProposedSolution']), 'No proposed solution provided.', triggerOutputs()?['body/ProposedSolution'])}
-              </p>
-            </td>
-          </tr>
-
-          <!-- CLASSIFICATION -->
-          <tr>
-            <td style="padding:20px 32px 0 32px;">
-              <p style="margin:0 0 10px 0; font-size:11px; font-weight:bold; color:#2E75B6; text-transform:uppercase; letter-spacing:1px;">Classification & Impact</p>
-              <table width="100%" cellpadding="8" cellspacing="1" style="background-color:#e0e0e0; border-radius:6px; overflow:hidden;">
-                <tr style="background-color:#ffffff;">
-                  <td width="33%" style="font-size:12px; color:#888888;">Category</td>
-                  <td width="33%" style="font-size:12px; color:#888888;">Effort (Points)</td>
-                  <td width="34%" style="font-size:12px; color:#888888;">Users Affected</td>
-                </tr>
-                <tr style="background-color:#f4f6f9;">
-                  <td style="font-size:14px; font-weight:bold; color:#1F3864;">@{triggerOutputs()?['body/Category/Value']}</td>
-                  <td style="font-size:14px; font-weight:bold; color:#1F3864;">@{triggerOutputs()?['body/EffortPoints']}</td>
-                  <td style="font-size:14px; font-weight:bold; color:#1F3864;">@{triggerOutputs()?['body/UsersAffected/Value']}</td>
-                </tr>
-                <tr style="background-color:#ffffff;">
-                  <td colspan="3" style="font-size:12px; color:#888888;">Affected Applications</td>
-                </tr>
-                <tr style="background-color:#f4f6f9;">
-                  <td colspan="3" style="font-size:14px; font-weight:bold; color:#1F3864;">
-                    @{if(empty(triggerOutputs()?['body/AffectedApps']), 'Not specified', triggerOutputs()?['body/AffectedApps'])}
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- EXPECTED BENEFITS -->
-          <tr>
-            <td style="padding:20px 32px 0 32px;">
-              <p style="margin:0 0 6px 0; font-size:11px; color:#888888; text-transform:uppercase;">Expected Benefits</p>
-              <p style="margin:0; font-size:14px; color:#333333; background-color:#D4EFDF; border-left:4px solid #1A7A5E; padding:12px 16px; border-radius:0 6px 6px 0;">
-                @{if(empty(triggerOutputs()?['body/ExpectedBenefits']), 'Not specified', triggerOutputs()?['body/ExpectedBenefits'])}
-              </p>
-            </td>
-          </tr>
-
-          <!-- ADDITIONAL NOTES -->
-          <tr>
-            <td style="padding:20px 32px 0 32px;">
-              <p style="margin:0 0 6px 0; font-size:11px; color:#888888; text-transform:uppercase;">Additional Notes</p>
-              <p style="margin:0; font-size:14px; color:#333333; background-color:#f4f6f9; padding:12px 16px; border-radius:6px; border:1px solid #e0e0e0;">
-                @{if(empty(triggerOutputs()?['body/AdditionalNotes']), 'None', triggerOutputs()?['body/AdditionalNotes'])}
-              </p>
-            </td>
-          </tr>
-
-          <!-- CTA BUTTON -->
-          <tr>
-            <td align="center" style="padding:28px 32px;">
-              <a href="YOUR_SHAREPOINT_LIST_URL" 
-                 style="background-color:#2E75B6; color:#ffffff; text-decoration:none; font-size:14px; font-weight:bold; padding:12px 32px; border-radius:6px; display:inline-block;">
-                View in SharePoint →
-              </a>
-            </td>
-          </tr>
-
-          <!-- FOOTER -->
-          <tr>
-            <td style="background-color:#f4f6f9; border-top:1px solid #e0e0e0; padding:20px 32px; text-align:center;">
-              <p style="margin:0; font-size:12px; color:#888888;">This is an automated notification from the <strong>CATS Intake System</strong></p>
-              <p style="margin:4px 0 0 0; font-size:11px; color:#aaaaaa;">CoE Automation and Tools Squad · UAT CoE · Internal Use Only</p>
-            </td>
-          </tr>
-
         </table>
       </td>
     </tr>
+
+    <!-- TRACKING BAR -->
+    <tr>
+      <td style="background-color:#2E75B6;padding:14px 36px;border-left:1px solid #2a3a55;border-right:1px solid #2a3a55;">
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td>
+              <p style="margin:0;font-size:10px;color:#BDD7EE;letter-spacing:2px;text-transform:uppercase;">Tracking ID</p>
+              <p style="margin:4px 0 0 0;font-size:18px;font-weight:800;color:#ffffff;letter-spacing:1px;">@{outputs('Update_item')?['body/TrackingID']}</p>
+            </td>
+            <td align="right">
+              <p style="margin:0;font-size:10px;color:#BDD7EE;letter-spacing:2px;text-transform:uppercase;">Submitted On</p>
+              <p style="margin:4px 0 0 0;font-size:13px;font-weight:600;color:#ffffff;">@{formatDateTime(utcNow(), 'MMM dd, yyyy')} &nbsp;@{formatDateTime(utcNow(), 'hh:mm tt')} UTC</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- PRIORITY + TYPE + CATEGORY BADGES -->
+    <tr>
+      <td style="background-color:#1e2f45;padding:20px 36px;border-left:1px solid #2a3a55;border-right:1px solid #2a3a55;">
+        <table cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="background-color:#7B2D00;border-radius:20px;padding:7px 18px;">
+              <span style="font-size:11px;font-weight:700;color:#FFB347;text-transform:uppercase;letter-spacing:1px;">⚡ @{triggerOutputs()?['body/Priority/Value']} Priority</span>
+            </td>
+            <td width="10"></td>
+            <td style="background-color:#0d3a5c;border-radius:20px;padding:7px 18px;">
+              <span style="font-size:11px;font-weight:700;color:#6BBAFF;text-transform:uppercase;letter-spacing:1px;">@{triggerOutputs()?['body/RequestType/Value']}</span>
+            </td>
+            <td width="10"></td>
+            <td style="background-color:#1a3a2a;border-radius:20px;padding:7px 18px;">
+              <span style="font-size:11px;font-weight:700;color:#5DD6A0;text-transform:uppercase;letter-spacing:1px;">@{triggerOutputs()?['body/Category/Value']}</span>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- TITLE -->
+    <tr>
+      <td style="background-color:#1e2f45;padding:0 36px 24px 36px;border-left:1px solid #2a3a55;border-right:1px solid #2a3a55;">
+        <div style="background-color:#162236;border-left:4px solid #2E75B6;border-radius:0 8px 8px 0;padding:16px 20px;">
+          <p style="margin:0 0 4px 0;font-size:10px;color:#6B8CC7;letter-spacing:2px;text-transform:uppercase;">Request Title</p>
+          <p style="margin:0;font-size:18px;font-weight:700;color:#ffffff;">@{triggerOutputs()?['body/Title']}</p>
+        </div>
+      </td>
+    </tr>
+
+    <!-- DIVIDER -->
+    <tr>
+      <td style="background-color:#1e2f45;padding:0 36px;border-left:1px solid #2a3a55;border-right:1px solid #2a3a55;">
+        <div style="height:1px;background-color:#2a3a55;font-size:0;">&nbsp;</div>
+      </td>
+    </tr>
+
+    <!-- SUBMITTER INFO -->
+    <tr>
+      <td style="background-color:#1e2f45;padding:24px 36px;border-left:1px solid #2a3a55;border-right:1px solid #2a3a55;">
+        <p style="margin:0 0 14px 0;font-size:10px;font-weight:700;color:#2E75B6;letter-spacing:3px;text-transform:uppercase;">👤 Submitter Information</p>
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="48%" style="background-color:#162236;border-radius:8px;padding:14px 16px;vertical-align:top;">
+              <p style="margin:0 0 4px 0;font-size:10px;color:#6B8CC7;text-transform:uppercase;letter-spacing:1px;">Full Name</p>
+              <p style="margin:0;font-size:14px;font-weight:700;color:#ffffff;">@{triggerOutputs()?['body/SubmitterName']}</p>
+            </td>
+            <td width="4%"></td>
+            <td width="48%" style="background-color:#162236;border-radius:8px;padding:14px 16px;vertical-align:top;">
+              <p style="margin:0 0 4px 0;font-size:10px;color:#6B8CC7;text-transform:uppercase;letter-spacing:1px;">Email</p>
+              <p style="margin:0;font-size:14px;font-weight:700;color:#6BBAFF;">@{triggerOutputs()?['body/Email']}</p>
+            </td>
+          </tr>
+          <tr><td colspan="3" height="8"></td></tr>
+          <tr>
+            <td colspan="3" style="background-color:#162236;border-radius:8px;padding:14px 16px;vertical-align:top;">
+              <p style="margin:0 0 4px 0;font-size:10px;color:#6B8CC7;text-transform:uppercase;letter-spacing:1px;">UAT Area</p>
+              <p style="margin:0;font-size:14px;font-weight:700;color:#ffffff;">@{triggerOutputs()?['body/UATArea/Value']}</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- DIVIDER -->
+    <tr>
+      <td style="background-color:#1e2f45;padding:0 36px;border-left:1px solid #2a3a55;border-right:1px solid #2a3a55;">
+        <div style="height:1px;background-color:#2a3a55;font-size:0;">&nbsp;</div>
+      </td>
+    </tr>
+
+    <!-- REQUEST DETAILS -->
+    <tr>
+      <td style="background-color:#1e2f45;padding:24px 36px;border-left:1px solid #2a3a55;border-right:1px solid #2a3a55;">
+        <p style="margin:0 0 14px 0;font-size:10px;font-weight:700;color:#2E75B6;letter-spacing:3px;text-transform:uppercase;">📝 Request Details</p>
+
+        <p style="margin:0 0 8px 0;font-size:10px;color:#6B8CC7;text-transform:uppercase;letter-spacing:1px;">Problem Description</p>
+        <div style="background-color:#162236;border-left:4px solid #2E75B6;border-radius:0 8px 8px 0;padding:16px 20px;margin-bottom:16px;">
+          <p style="margin:0;font-size:14px;color:#ccd6f6;line-height:1.7;">@{triggerOutputs()?['body/ProblemDescription']}</p>
+        </div>
+
+        <p style="margin:0 0 8px 0;font-size:10px;color:#6B8CC7;text-transform:uppercase;letter-spacing:1px;">Proposed Solution</p>
+        <div style="background-color:#162236;border-left:4px solid #5DD6A0;border-radius:0 8px 8px 0;padding:16px 20px;">
+          <p style="margin:0;font-size:14px;color:#ccd6f6;line-height:1.7;">@{if(empty(triggerOutputs()?['body/ProposedSolution']), 'No proposed solution provided.', triggerOutputs()?['body/ProposedSolution'])}</p>
+        </div>
+      </td>
+    </tr>
+
+    <!-- DIVIDER -->
+    <tr>
+      <td style="background-color:#1e2f45;padding:0 36px;border-left:1px solid #2a3a55;border-right:1px solid #2a3a55;">
+        <div style="height:1px;background-color:#2a3a55;font-size:0;">&nbsp;</div>
+      </td>
+    </tr>
+
+    <!-- CLASSIFICATION & IMPACT -->
+    <tr>
+      <td style="background-color:#1e2f45;padding:24px 36px;border-left:1px solid #2a3a55;border-right:1px solid #2a3a55;">
+        <p style="margin:0 0 14px 0;font-size:10px;font-weight:700;color:#2E75B6;letter-spacing:3px;text-transform:uppercase;">📊 Classification &amp; Impact</p>
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="48%" style="background-color:#162236;border-radius:8px;padding:14px 16px;text-align:center;vertical-align:top;">
+              <p style="margin:0 0 6px 0;font-size:10px;color:#6B8CC7;text-transform:uppercase;letter-spacing:1px;">Category</p>
+              <p style="margin:0;font-size:15px;font-weight:700;color:#ffffff;">@{triggerOutputs()?['body/Category/Value']}</p>
+            </td>
+            <td width="4%"></td>
+            <td width="48%" style="background-color:#162236;border-radius:8px;padding:14px 16px;text-align:center;vertical-align:top;">
+              <p style="margin:0 0 6px 0;font-size:10px;color:#6B8CC7;text-transform:uppercase;letter-spacing:1px;">Users Affected</p>
+              <p style="margin:0;font-size:15px;font-weight:700;color:#ffffff;">@{if(empty(triggerOutputs()?['body/UsersAffected/Value']), '—', triggerOutputs()?['body/UsersAffected/Value'])}</p>
+            </td>
+          </tr>
+          <tr><td colspan="3" height="8"></td></tr>
+          <tr>
+            <td colspan="3" style="background-color:#1a3a2a;border-left:4px solid #5DD6A0;border-radius:0 8px 8px 0;padding:14px 16px;">
+              <p style="margin:0 0 4px 0;font-size:10px;color:#5DD6A0;text-transform:uppercase;letter-spacing:1px;">Expected Benefits</p>
+              <p style="margin:0;font-size:14px;color:#ccd6f6;line-height:1.6;">@{if(empty(triggerOutputs()?['body/ExpectedBenefits']), 'Not specified', triggerOutputs()?['body/ExpectedBenefits'])}</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- CTA BUTTON -->
+    <tr>
+      <td align="center" style="background-color:#1a2535;padding:28px 36px;border-left:1px solid #2a3a55;border-right:1px solid #2a3a55;">
+        <a href="YOUR_SHAREPOINT_LIST_URL"
+           style="background-color:#2E75B6;color:#ffffff;text-decoration:none;font-size:14px;font-weight:700;padding:14px 36px;border-radius:6px;display:inline-block;letter-spacing:0.5px;">
+          View in SharePoint &nbsp;→
+        </a>
+        <p style="margin:12px 0 0 0;font-size:11px;color:#4a6080;">Click above to open the full submission record</p>
+      </td>
+    </tr>
+
+    <!-- FOOTER -->
+    <tr>
+      <td style="background-color:#131f2e;padding:20px 36px;border-left:1px solid #2a3a55;border-right:1px solid #2a3a55;border-radius:0 0 8px 8px;text-align:center;">
+        <p style="margin:0 0 4px 0;font-size:12px;color:#4a6080;">This is an automated notification from the <strong style="color:#6B8CC7;">CATS Intake System</strong></p>
+        <p style="margin:0;font-size:11px;color:#3a5070;">CoE Automation and Tools Squad &nbsp;·&nbsp; UAT CoE &nbsp;·&nbsp; Internal Use Only</p>
+      </td>
+    </tr>
+
+    <!-- BOTTOM ACCENT BAR -->
+    <tr>
+      <td style="background:linear-gradient(90deg,#2E75B6,#7B5EA7);height:4px;border-radius:0 0 8px 8px;font-size:0;">&nbsp;</td>
+    </tr>
+
   </table>
+
+</td></tr>
+</table>
 
 </body>
 </html>
